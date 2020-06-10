@@ -20,3 +20,45 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+app.html
+pages
+- index.vue "StartSeite"
+- - page1
+- - page2
+components
+- comp1
+- comp2
+layouts
+- x.vue
+- y.vuw
+store
+- vueexstorefiles
+
+
+- Layouts
+<template>
+    <theheader>
+    <Supportgui>
+    <thefooter>
+</template>
+
+import TheHeader from @/components/TheHeader/TheHeader)
+
+export default {
+    components: {
+        TheHeader
+        ...vue
+    }
+}
+
+components
+import {mapstate, mapactions} from "vuex"
+
+app.html
+<Dotype....>
+<html {{ HTMLATRRS }}>
+    <heaD {{ head_atttrS }}>
+    {{ HEAD }}
+    <body {body_attrs }}>
+    {{APP}}
