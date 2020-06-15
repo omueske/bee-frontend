@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <locations />
-  </div>
+  <div><locations /></div>
 </template>
 
 <script>
@@ -14,15 +12,11 @@ export default {
   },
   async fetch({ store }) {
     await store.dispatch('locations/get')
-    await store.dispatch('locations/getLocation', '5edfd6ae533e100fb04337cb')
-    await store.dispatch('hives/get')
   },
-
   computed: {
     ...mapState({
       locationList: (state) => state.locations.locationsList,
-      selectedLocation: (state) => state.locations.selectedLocation,
-      selectedHive: (state) => state.hives.selectedHive
+      locationHives: (state) => state.location.locationHives
     })
   }
 }

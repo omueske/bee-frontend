@@ -1,8 +1,6 @@
 <template>
   <div>
     <h1>Locations</h1>
-    <!-- <div>LOCATIONS liste: {{ locationList }}<br /><br /></div>
-    <div>Selected LOCATION: {{ selectedLocation }}<br /><br /></div> -->
     <div v-for="loc in locationList" :key="loc.id">
       <div class="div-box">
         u-Id: {{ loc._id }} <br />Name: {{ loc.name }} <br />
@@ -30,10 +28,12 @@ export default {
   computed: {
     ...mapState({
       locationList: (state) => state.locations.locationsList,
-      selectedLocation: (state) => state.locations.selectedLocation,
-      hivesList: (state) => state.hives.hivesList,
-      selectedHive: (state) => state.hives.selectedHive
+      locationHives: (state) => state.location.locationHives
     })
+  },
+
+  created() {
+    this.$store.dispatch('locations/getLocationsHives')
   }
 }
 </script>
