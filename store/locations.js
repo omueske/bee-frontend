@@ -1,61 +1,60 @@
-import merge from 'vuex'
+// import vuex from 'vuex'
 import axios from 'axios'
 
 export const state = () => ({
-  selectedLocation: {},
+  locationHives: [],
   locationsList: []
 })
 
 export const mutations = {
-  set(state, locations) {
+  SET_LOCATION(state, locations) {
     state.locationsList = locations
   },
-  add(state, value) {
-    merge(state.locationsList, value)
-  },
-  remove(state, { location }) {
-    state.locationsList.splice(state.locationsList.indexOf(location), 1)
-  },
-  setLocation(state, loc) {
-    state.selectedLocation = loc
-    console.table(state.selectedLocation)
+
+  ADD_HIVE_TO_LOC(state, value) {
+    state.locationHives.push(value)
+    console.table(state.locationHives)
   }
 }
-
 export const actions = {
   async get({ commit }) {
     await this.$axios
       .get('http://localhost:8080/api/v1/locations')
       .then((res) => {
         if (res.status === 200) {
-          commit('set', res.data)
+          commit('SET_LOCATION', res.data)
         }
       })
-  },
-  async show({ commit }, params) {
-    await this.$axios
-      .get(`http://localhost:8080/api/v1/locations/${params.id}`)
-      .then((res) => {
-        if (res.status === 200) {
-          commit('setLocation', res.data)
-        }
-      })
-  },
-  async set({ commit }, location) {
-    await commit('set', location)
   },
 
-  async getLocation({ commit }, params) {
-    console.log('getLocation called' + params)
+  async getLocationsHives({ commit }) {
+    console.log('getLocationsHives called ')
+
     return await axios
-      .get(`http://localhost:8080/api/v1/locations/${params}`)
+      .get(`http://localhost:8080/api/v1/locations`) // Returns all locations
       .then((res) => {
-        console.log(res.data)
-        console.log(typeof res.data)
-        commit('setLocation', res.data)
-      })
-      .catch((err) => {
-        console.log(err)
+        res = res.data
+        for (const element of res) {
+          const promises = []
+          for (const hive of element.hives) {
+            // Für jeses Volk in der Location
+            console.log('Calling: ' + `http://localhost:8080` + hive.href)
+            promises.push(axios.get(`http://localhost:8080` + hive.href))
+          }
+          const result = { id: element._id, hives: [] }
+          Promise.all(promises)
+            .then(function(results) {
+              results.forEach(function(response) {
+                // element.allHives = []
+                // element.allHives.push(response.data)
+                result.hives.push(response.data)
+              })
+              commit('ADD_HIVE_TO_LOC', result)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        }
       })
   }
 }
