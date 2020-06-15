@@ -41,14 +41,15 @@ export const actions = {
             console.log('Calling: ' + `http://localhost:8080` + hive.href)
             promises.push(axios.get(`http://localhost:8080` + hive.href))
           }
-
+          const result = { id: element._id, hives: [] }
           Promise.all(promises)
             .then(function(results) {
               results.forEach(function(response) {
-                element.allHives = []
-                element.allHives.push(response.data)
+                // element.allHives = []
+                // element.allHives.push(response.data)
+                result.hives.push(response.data)
               })
-              commit('ADD_HIVE_TO_LOC', element)
+              commit('ADD_HIVE_TO_LOC', result)
             })
             .catch((err) => {
               console.log(err)
