@@ -24,6 +24,7 @@ export const mutations = {
 
 export const actions = {
   async get({ commit }) {
+    console.log('Hives GET called')
     await this.$axios.get('http://localhost:8080/api/v1/hives').then((res) => {
       if (res.status === 200) {
         commit('set', res.data)
@@ -56,5 +57,11 @@ export const actions = {
       .catch((err) => {
         console.log(err)
       })
+  }
+}
+
+export const getters = {
+  getHiveById: (state) => (id) => {
+    return state.hivesList.find((hiveId) => hiveId._id === id)
   }
 }

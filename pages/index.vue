@@ -1,5 +1,7 @@
 <template>
-  <div><locations /></div>
+  <div>
+    <locations />
+  </div>
 </template>
 
 <script>
@@ -15,8 +17,7 @@ export default {
   },
   computed: {
     ...mapState({
-      locationList: (state) => state.locations.locationsList,
-      locationHives: (state) => state.location.locationHives
+      locationList: (state) => state.locations.locationsList
     })
   }
 }
