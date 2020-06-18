@@ -1,5 +1,7 @@
 <template>
-  <div class="div-box">hive: {{ hive.number }}H: {{ hive.status }}</div>
+  <div class="div-box">
+    Volk: {{ hive.number }}<br />Status: {{ hive.status }}
+  </div>
 </template>
 
 <script>
@@ -25,7 +27,6 @@ export default {
 
 <style scoped>
 .div-box {
-  /* width: 49%; */
   border: 1px solid black;
   padding: 10px;
   margin-top: 5px;

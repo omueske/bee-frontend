@@ -42,7 +42,6 @@ export default {
 
 <style scoped>
 .div-box {
-  /* width: 49%; */
   border: 1px solid black;
   padding: 10px;
 }
