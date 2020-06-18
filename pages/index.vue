@@ -12,13 +12,14 @@ export default {
   components: {
     locations
   },
-  async fetch({ store }) {
-    await store.dispatch('locations/get')
-  },
   computed: {
     ...mapState({
       locationList: (state) => state.locations.locationsList
     })
+  },
+  created() {
+    this.$store.dispatch('hives/get')
+    this.$store.dispatch('locations/get')
   }
 }
 </script>

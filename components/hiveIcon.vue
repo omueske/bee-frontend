@@ -1,9 +1,9 @@
 <template>
-  <div class="div-box">H: {{ hiveid }} Hive: {{ hive }}</div>
+  <div class="div-box">hive: {{ hive.number }}H: {{ hive.status }}</div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   props: {
     hiveid: {
@@ -13,13 +13,10 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      locationList: (state) => state.locations.locationsList
-    }),
-
     ...mapGetters('hives', ['getHiveById']),
 
     hive() {
+      console.log(this.getHiveById(this.hiveid))
       return this.getHiveById(this.hiveid)
     }
   }

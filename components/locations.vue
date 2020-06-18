@@ -36,10 +36,6 @@ export default {
       locationList: (state) => state.locations.locationsList,
       hivesList: (state) => state.hives.hivesList
     })
-  },
-
-  created() {
-    this.$store.dispatch('hives/get')
   }
 }
 </script>
