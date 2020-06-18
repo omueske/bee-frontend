@@ -23,33 +23,33 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 app.html
 pages
+
 - index.vue "StartSeite"
 - - page1
 - - page2
-components
+    components
 - comp1
 - comp2
-layouts
+  layouts
 - x.vue
 - y.vuw
-store
+  store
 - vueexstorefiles
 
-
-- Layouts
-<template>
-    <theheader>
-    <Supportgui>
-    <thefooter>
-</template>
+* Layouts
+  <template>
+  <theheader>
+  <Supportgui>
+  <thefooter>
+  </template>
 
 import TheHeader from @/components/TheHeader/TheHeader)
 
 export default {
-    components: {
-        TheHeader
-        ...vue
-    }
+components: {
+TheHeader
+...vue
+}
 }
 
 components
@@ -57,8 +57,11 @@ import {mapstate, mapactions} from "vuex"
 
 app.html
 <Dotype....>
+
 <html {{ HTMLATRRS }}>
     <heaD {{ head_atttrS }}>
     {{ HEAD }}
     <body {body_attrs }}>
     {{APP}}
+
+    https://medium.com/from-zero-to-hero-of-free-web-development/using-bootstrap-and-element-ui-with-vue-js-nuxt-js-e8c7cc38d8e

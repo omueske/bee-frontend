@@ -3,15 +3,21 @@
     <h1>Locations</h1>
     <div v-for="loc in locationList" :key="loc.id">
       <div class="div-box">
-        u-Id: {{ loc._id }} <br />Name: {{ loc.name }} <br />
-        Adresse: {{ loc.adress }} <br />
-        Koordinaten: {{ loc.longitude }} , {{ loc.latitude }} Völker: <br />
+        u-Id: {{ loc._id }}
+        <br />
+        Name: {{ loc.name }}
+        <br />
+        Adresse: {{ loc.adress }}
+        <br />
+        Koordinaten: {{ loc.longitude }} , {{ loc.latitude }} Völker:
+        <br />
         <div v-for="hive in loc.hives" :key="hive._id">
-          {{ hive._id }}
+          <!-- {{ hive._id }} -->
           <hiveIcon :hiveid="hive.hiveId" />
         </div>
       </div>
-      <br /><br />
+      <br />
+      <br />
     </div>
   </div>
 </template>
@@ -28,19 +34,14 @@ export default {
   computed: {
     ...mapState({
       locationList: (state) => state.locations.locationsList,
-      locationHives: (state) => state.location.locationHives
+      hivesList: (state) => state.hives.hivesList
     })
-  },
-
-  created() {
-    this.$store.dispatch('locations/getLocationsHives')
   }
 }
 </script>
 
 <style scoped>
 .div-box {
-  /* width: 49%; */
   border: 1px solid black;
   padding: 10px;
 }
