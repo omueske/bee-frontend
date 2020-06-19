@@ -56,3 +56,8 @@ export const actions = {
       })
   }
 }
+export const getters = {
+  getLocById: (state) => (id) => {
+    return state.locationsList.find((locId) => locId._id === id)
+  }
+}

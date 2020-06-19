@@ -44,6 +44,9 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
+  bootstrapVue: {
+    icons: true
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

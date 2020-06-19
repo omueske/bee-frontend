@@ -1,18 +1,15 @@
 <template>
   <b-container>
-    <div>
+    <div class="div-box">
       <b-row>
-        <div>
-          <b-col l="4">
-            <b-card>
-              <b-card-text
-                >Volk: {{ hive.number }}<br />Status:
-                {{ hive.status }}</b-card-text
-              >
-              <b-button href="#" variant="primary">blubb</b-button>
-            </b-card>
-          </b-col>
-        </div>
+        <b-col>
+          <b-card>
+            <b-card-text
+              >Volk: {{ hive.number }}<br />Status:
+              {{ hive.status }}</b-card-text
+            >
+          </b-card>
+        </b-col>
       </b-row>
     </div>
   </b-container>
@@ -38,3 +35,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.div-box {
+  margin: 3pt;
+}
+</style>
