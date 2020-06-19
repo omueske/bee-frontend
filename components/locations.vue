@@ -13,7 +13,7 @@
         <br />
         <div v-for="hive in loc.hives" :key="hive._id">
           <!-- {{ hive._id }} -->
-          <hiveIcon :hiveid="hive.hiveId" />
+          <cards :hiveid="hive.hiveId" />
         </div>
       </div>
       <br />
@@ -24,11 +24,13 @@
 
 <script>
 import { mapState } from 'vuex'
-import hiveIcon from '@/components/hiveIcon'
+// import hiveIcon from '@/components/hiveIcon'
+import cards from '@/components/cards'
 
 export default {
   components: {
-    hiveIcon
+    // hiveIcon,
+    cards
   },
 
   computed: {
