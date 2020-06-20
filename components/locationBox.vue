@@ -1,15 +1,17 @@
 <template>
   <b-container class="location-box">
+    <b-row
+      ><b-col><br /></b-col
+    ></b-row>
     <b-row>
-      <b-col
-        ><h3>{{ loc.name }}</h3></b-col
-      ></b-row
-    >
+      <b-col>Standort: {{ loc.name }}</b-col>
+      <b-col><ButtonAddHive class="text-right"/></b-col
+    ></b-row>
     <b-row class="mb-3">
       <b-col>
         <b-row>
           <b-col v-for="hive in loc.hives" :key="hive._id" cols="3">
-            <cards :hiveid="hive.hiveId" />
+            <hiveCard :hiveid="hive.hiveId" />
           </b-col>
         </b-row>
       </b-col>
@@ -19,11 +21,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import cards from '@/components/cards'
+import hiveCard from '@/components/hiveCard'
+import ButtonAddHive from '@/components/ButtonAddHive'
 
 export default {
   components: {
-    cards
+    hiveCard,
+    ButtonAddHive
   },
   props: {
     locid: {

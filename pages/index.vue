@@ -2,7 +2,7 @@
   ><div>
     <b-container>
       <b-row
-        ><b-col><h1>Locations</h1></b-col></b-row
+        ><b-col><h1>Standorte</h1></b-col></b-row
       ><b-row
         ><b-col><ButtonAddLocation /></b-col
       ></b-row>

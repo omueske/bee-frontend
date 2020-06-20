@@ -4,10 +4,16 @@
       <b-row>
         <b-col>
           <b-card>
+            <b-button variant="outline-secondary" size="xs">
+              <b-icon-x-circle size="xs"
+            /></b-button>
             <b-card-text
               >Volk: {{ hive.number }}<br />Status:
               {{ hive.status }}</b-card-text
             >
+            <hr />
+            <h5>Stockkarte</h5>
+            <ButtonGroupHive />
           </b-card>
         </b-col>
       </b-row>
@@ -17,7 +23,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import ButtonGroupHive from '@/components/ButtonGroupHive'
+
 export default {
+  components: {
+    ButtonGroupHive
+  },
+
   props: {
     hiveid: {
       type: String,
