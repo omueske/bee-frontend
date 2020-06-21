@@ -5,7 +5,8 @@
     ></b-row>
     <b-row>
       <b-col>Standort: {{ loc.name }}</b-col>
-      <b-col><ButtonAddHive class="text-right"/></b-col
+      <b-col><ButtonAddHive class="text-right"/></b-col>
+      <b-col><ButtonGroupLocation :locid="this.locid"/></b-col
     ></b-row>
     <b-row class="mb-3">
       <b-col>
@@ -20,14 +21,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import hiveCard from '@/components/hiveCard'
 import ButtonAddHive from '@/components/ButtonAddHive'
+import ButtonGroupLocation from '@/components/ButtonGroupLocation'
 
 export default {
   components: {
     hiveCard,
-    ButtonAddHive
+    ButtonAddHive,
+    ButtonGroupLocation
   },
   props: {
     locid: {
@@ -38,6 +41,7 @@ export default {
 
   computed: {
     ...mapGetters('locations', ['getLocById']),
+    ...mapActions('locations', ['deleteLocation']),
 
     loc() {
       console.log(this.getLocById(this.locid))

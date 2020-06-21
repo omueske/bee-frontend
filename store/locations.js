@@ -2,6 +2,7 @@
 import axios from 'axios'
 
 export const state = () => ({
+  currentLocation: String,
   locationHives: [],
   locationsList: []
 })
@@ -11,6 +12,10 @@ export const mutations = {
     state.locationsList = locations
   },
 
+  SET_CURRENT_LOCATION(state, location) {
+    state.currentLocation = location
+  },
+
   ADD_LOCATION(state, loc) {
     state.locationsList.push(loc)
   },
@@ -18,6 +23,12 @@ export const mutations = {
   ADD_HIVE_TO_LOC(state, value) {
     state.locationHives.push(value)
     // console.table(state.locationHives)
+  },
+
+  DELETE_LOCATION(state, location) {
+    console.table(location)
+    const delLocation = state.locationsList.findIndex((x) => x._id === location)
+    state.locationsList.splice(delLocation, 1)
   }
 }
 export const actions = {
@@ -37,6 +48,19 @@ export const actions = {
       .post('http://localhost:8080/api/v1/locations', data)
       .then((result) => {
         commit('ADD_LOCATION', result.data)
+      })
+      .catch((error) => {
+        throw new Error(`API ${error}`)
+      })
+  },
+
+  async deleteLocation({ commit }, payload) {
+    console.log('Payload ' + payload)
+    await axios
+      .delete('http://localhost:8080/api/v1/locations/' + payload)
+      .then((result) => {
+        console.log(result.data)
+        commit('DELETE_LOCATION', payload)
       })
       .catch((error) => {
         throw new Error(`API ${error}`)

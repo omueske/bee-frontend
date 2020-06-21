@@ -34,6 +34,16 @@
               id="adress"
               :value="location.adress"
               @input="updateField('adress', $event)"
+          /></b-form-group>
+          <b-form-group
+            id="maxHiveCount"
+            label="Maximale Anzahl Völker:"
+            label-for="maxHiveCount"
+          >
+            <b-form-input
+              id="maxHiveCount"
+              :value="location.maxHiveCount"
+              @input="updateField('maxHiveCount', $event)"
             />
           </b-form-group>
           <b-form-group
@@ -77,6 +87,7 @@ export default {
         adress: '',
         lon: '',
         lat: '',
+        maxHiveCount: '',
         comment: ''
       },
       stateLocName: null
@@ -115,6 +126,7 @@ export default {
         adress: '',
         lon: '',
         lat: '',
+        maxHiveCount: '',
         comment: ''
       }
       // Hide the modal manually
