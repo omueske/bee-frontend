@@ -32,6 +32,7 @@ export const actions = {
   },
 
   async addLocation({ commit }, data) {
+    console.table(data.latitude)
     await axios
       .post('http://localhost:8080/api/v1/locations', data)
       .then((result) => {

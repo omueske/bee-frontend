@@ -25,13 +25,16 @@
               id="name"
               :state="stateLocName"
               :value="location.name"
-              @input="updateField('name', $event)"
               required
+              @input="updateField('name', $event)"
             />
-            {{ location.name }}
           </b-form-group>
-          <b-form-group id="locAddress" label="Adresse" label-for="locAdress">
-            <b-form-input id="locAdress" :value="location.adress" />
+          <b-form-group id="adress" label="Adresse" label-for="adress">
+            <b-form-input
+              id="adress"
+              :value="location.adress"
+              @input="updateField('adress', $event)"
+            />
           </b-form-group>
           <b-form-group
             id="locCoords"
@@ -40,26 +43,22 @@
           >
             Breitenrad
             <b-form-input
-              id="locCoordsLat"
-              :value="location.latitute"
-              @input="updateField('locCoordsLat', $event)"
+              id="latitude"
+              :value="location.lat"
+              @input="updateField('lat', $event)"
             />
             Längengrad
             <b-form-input
-              id="locCoordsLan"
-              :value="location.langitute"
-              @input="updateField('locCoordsLan', $event)"
+              id="longitude"
+              :value="location.lon"
+              @input="updateField('lon', $event)"
             />
           </b-form-group>
-          <b-form-group
-            id="locComment"
-            label="Kommentar"
-            label-for="locComment"
-          >
+          <b-form-group id="comment" label="Kommentar" label-for="comment">
             <b-form-input
-              id="locComment"
+              id="comment"
               :value="location.comment"
-              @input="updateField('locComment', $event)"
+              @input="updateField('comment', $event)"
             />
           </b-form-group>
         </form>
@@ -76,8 +75,8 @@ export default {
       location: {
         name: '',
         adress: '',
-        longitudee: '',
-        latitute: '',
+        lon: '',
+        lat: '',
         comment: ''
       },
       stateLocName: null
@@ -114,8 +113,8 @@ export default {
       this.location = {
         name: '',
         adress: '',
-        longitudee: '',
-        latitute: '',
+        lon: '',
+        lat: '',
         comment: ''
       }
       // Hide the modal manually
