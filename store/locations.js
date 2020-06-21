@@ -11,6 +11,10 @@ export const mutations = {
     state.locationsList = locations
   },
 
+  ADD_LOCATION(state, loc) {
+    state.locationsList.push(loc)
+  },
+
   ADD_HIVE_TO_LOC(state, value) {
     state.locationHives.push(value)
     // console.table(state.locationHives)
@@ -24,6 +28,17 @@ export const actions = {
         if (res.status === 200) {
           commit('SET_LOCATION', res.data)
         }
+      })
+  },
+
+  async addLocation({ commit }, data) {
+    await axios
+      .post('http://localhost:8080/api/v1/locations', data)
+      .then((result) => {
+        commit('ADD_LOCATION', result.data)
+      })
+      .catch((error) => {
+        throw new Error(`API ${error}`)
       })
   },
 

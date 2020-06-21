@@ -3,10 +3,13 @@
     <div class="div-box">
       <b-row>
         <b-col>
-          <b-card>
-            <b-button variant="outline-secondary" size="xs">
-              <b-icon-x-circle size="xs"
-            /></b-button>
+          <b-card
+            :header="hive.name"
+            header-tag="header"
+            footer="Card Footer"
+            footer-tag="footer"
+            title="Title"
+          >
             <b-card-text
               >Volk: {{ hive.number }}<br />Status:
               {{ hive.status }}</b-card-text
