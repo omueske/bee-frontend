@@ -42,9 +42,15 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapState({
+      locationList: (state) => state.locations.locationsList,
+      hivesList: (state) => state.hives.hivesList
+    })
+  },
+
   methods: {
     ...mapActions('locations', ['deleteLocation']),
-    ...mapState({ locationsList: (state) => state.locations.locationsList }),
 
     resetModal() {
       this.stateLocName = null
@@ -56,12 +62,20 @@ export default {
       event.preventDefault()
 
       // Check if there are Hives left, so the Location cannot be deleted
-      if (this.locationsList.hives.length === 0) {
+      let currentLoc = ''
+      for (const loc of this.locationList) {
+        if (loc._id === this.locid) {
+          currentLoc = loc
+        }
+      }
+      console.table(currentLoc.hives.length)
+      if (currentLoc.hives.length === 0) {
         // Dispatch to API
-        console.log('Loc: ' + this.locid)
         this.deleteLocation(this.locid)
       } else {
-        console.log('Kann Standort nicht löschen, Bitte erst die Völker leeren')
+        console.log(
+          'Kann Standort nicht löschen, Bitte erst die Völker entfernen'
+        )
       }
       // Hide the modal manually
       this.$nextTick(() => {
