@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   props: {
     locid: {
@@ -44,6 +44,7 @@ export default {
   },
   methods: {
     ...mapActions('locations', ['deleteLocation']),
+    ...mapState({ locationsList: (state) => state.locations.locationsList }),
 
     resetModal() {
       this.stateLocName = null
@@ -54,12 +55,17 @@ export default {
       // Prevent modal from closing
       event.preventDefault()
 
-      // Dispatch to API
-      console.log('Loc: ' + this.locid)
-      this.deleteLocation(this.locid)
+      // Check if there are Hives left, so the Location cannot be deleted
+      if (this.locationsList.hives.length === 0) {
+        // Dispatch to API
+        console.log('Loc: ' + this.locid)
+        this.deleteLocation(this.locid)
+      } else {
+        console.log('Kann Standort nicht löschen, Bitte erst die Völker leeren')
+      }
       // Hide the modal manually
       this.$nextTick(() => {
-        this.$bvModal.hide('add-modal-loc')
+        this.$bvModal.hide('delete-modal-location')
       })
     }
   }
