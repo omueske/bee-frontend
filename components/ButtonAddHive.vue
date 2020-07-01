@@ -28,7 +28,7 @@
         <b-form-group id="name" label="Name" label-for="name">
           <b-form-input
             id="name"
-            :value="hive.buildType"
+            :value="hive.name"
             @input="updateField('name', $event)"
         /></b-form-group>
         <b-form-group id="buildType" label="Rähmchenmaß" label-for="buildType">
@@ -45,7 +45,6 @@
           />
         </b-form-group>
         <b-form-group id="status" label="Status" label-for="status">
-          Breitenrad
           <b-form-select
             id="status"
             v-model="selected"
@@ -127,6 +126,7 @@ export default {
         // console.log('LOCID: ' + this.locid)
         this.$bvModal.hide('modal-add-hive-' + this.locid)
       })
+      window.location.reload()
     },
     updateField(field, value) {
       this.hive[field] = value

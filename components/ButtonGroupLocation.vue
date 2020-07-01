@@ -2,9 +2,9 @@
   <b-row>
     <b-col>
       <b-button-group size="sm">
-        <b-button v-b-modal="'add-modal-hive'" variant="outline-secondary">
+        <!-- <b-button v-b-modal="'add-modal-hive'" variant="outline-secondary">
           <b-icon-plus-circle />
-        </b-button>
+        </b-button> -->
         <b-button
           v-b-modal="'delete-modal-location-' + locid"
           variant="outline-secondary"

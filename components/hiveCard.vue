@@ -8,7 +8,7 @@
             header-tag="header"
             footer="Card Footer"
             footer-tag="footer"
-            title="Title"
+            title=""
           >
             <b-card-text
               >Volk: {{ hive.number }}<br />Status:
