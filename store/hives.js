@@ -1,4 +1,4 @@
-import merge from 'vuex'
+// import merge from 'vuex'
 import axios from 'axios'
 
 export const state = () => ({
@@ -11,7 +11,8 @@ export const mutations = {
     state.hivesList = hives
   },
   add(state, value) {
-    merge(state.hivesList, value)
+    // merge(state.hivesList, value)
+    state.hivesList.push(value)
   },
   remove(state, { hive }) {
     state.hivesList.splice(state.hivesList.indexOf(hive), 1)
@@ -23,10 +24,20 @@ export const mutations = {
 }
 
 export const actions = {
+  async addHive({ commit }, params) {
+    await this.$axios
+      .post('http://localhost:8080/api/v1/hives', params)
+      .then((res) => {
+        if (res.status === 200) {
+          commit('add', res.data)
+        }
+      })
+  },
   async get({ commit }) {
     console.log('Hives GET called')
     await this.$axios.get('http://localhost:8080/api/v1/hives').then((res) => {
       if (res.status === 200) {
+        console.log(res.data)
         commit('set', res.data)
       }
     })

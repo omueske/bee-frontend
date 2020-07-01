@@ -13,7 +13,9 @@ export const mutations = {
   },
 
   SET_CURRENT_LOCATION(state, location) {
-    state.currentLocation = location
+    console.log('LOC_MUT: ' + location)
+    console.table(location.locid)
+    state.currentLocation = location.locid
   },
 
   ADD_LOCATION(state, loc) {
@@ -32,6 +34,11 @@ export const mutations = {
   }
 }
 export const actions = {
+  setCurrentLoc({ commit }, locid) {
+    console.table(locid)
+    commit('SET_CURRENT_LOCATION', locid)
+  },
+
   async get({ commit }) {
     await this.$axios
       .get('http://localhost:8080/api/v1/locations')

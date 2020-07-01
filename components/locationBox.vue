@@ -5,8 +5,8 @@
     ></b-row>
     <b-row>
       <b-col>Standort: {{ loc.name }}</b-col>
-      <b-col><ButtonAddHive class="text-right"/></b-col>
-      <b-col><ButtonGroupLocation :locid="this.locid"/></b-col
+      <b-col><ButtonAddHive class="text-right" :locid="locid" /> </b-col>
+      <b-col><ButtonGroupLocation :locid="locid"/></b-col
     ></b-row>
     <b-row class="mb-3">
       <b-col>
