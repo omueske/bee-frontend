@@ -61,6 +61,25 @@ export const actions = {
       })
   },
 
+  async addHiveToLocation({ commit }, payload) {
+    console.log('Loc: ' + payload.location)
+    console.log('HiveLoc: ' + payload.hive)
+    await axios
+      .post(
+        'http://localhost:8080/api/v1/locations/' +
+          payload.location +
+          '/' +
+          payload.hive
+      )
+      .then((result) => {
+        console.log(result.data)
+        // commit('DELETE_LOCATION', payload)
+      })
+      .catch((error) => {
+        throw new Error(`API ${error}`)
+      })
+  },
+
   async deleteLocation({ commit }, payload) {
     console.log('Payload ' + payload)
     await axios

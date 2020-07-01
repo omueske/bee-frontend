@@ -44,7 +44,7 @@ export default {
     ...mapActions('locations', ['deleteLocation']),
 
     loc() {
-      console.log(this.getLocById(this.locid))
+      // console.log(this.getLocById(this.locid))
       return this.getLocById(this.locid)
     }
   }

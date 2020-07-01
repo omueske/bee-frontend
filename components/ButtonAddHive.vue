@@ -25,6 +25,12 @@
             @input="updateField('number', $event)"
           />
         </b-form-group>
+        <b-form-group id="name" label="Name" label-for="name">
+          <b-form-input
+            id="name"
+            :value="hive.buildType"
+            @input="updateField('name', $event)"
+        /></b-form-group>
         <b-form-group id="buildType" label="Rähmchenmaß" label-for="buildType">
           <b-form-input
             id="buildType"
@@ -55,7 +61,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   props: {
@@ -81,21 +87,33 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState({
+      stateHive: (state) => state.hives.selectedHive
+    })
+  },
   methods: {
     ...mapActions('hives', ['addHive']),
+    ...mapActions('locations', ['addHiveToLocation']),
+
     resetModal() {
       this.stateLocName = null
     },
-    handleOk(event) {
-      console.log('Event Called')
-      console.table(event)
+    async handleOk(event) {
+      // console.log('Event Called')
+      // console.table(event)
       // Prevent modal from closing
       event.preventDefault()
 
       // Dispatch to API
-      console.log('Hive: ' + this.hive)
-      console.table(this.hive)
-      this.addHive(this.hive)
+      // console.log('Hive: ' + this.hive)
+      // console.table(this.hive)
+      await this.addHive(this.hive)
+      console.log('sh----> ' + this.stateHive._id)
+      console.log('loc----> ' + this.locid)
+      const payload = { location: this.locid, hive: this.stateHive._id }
+      console.table(payload)
+      await this.addHiveToLocation(payload)
       // unset values to avoid vuex state manipulation errors
       this.hive = {
         number: '',
@@ -106,7 +124,7 @@ export default {
       }
       // Hide the modal manually
       this.$nextTick(() => {
-        console.log('LOCID: ' + this.locid)
+        // console.log('LOCID: ' + this.locid)
         this.$bvModal.hide('modal-add-hive-' + this.locid)
       })
     },

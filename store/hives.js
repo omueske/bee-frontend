@@ -19,7 +19,7 @@ export const mutations = {
   },
   setHive(state, hive) {
     state.selectedHive = hive
-    console.table(state.selectedHive)
+    // console.table(state.selectedHive)
   }
 }
 
@@ -30,6 +30,7 @@ export const actions = {
       .then((res) => {
         if (res.status === 200) {
           commit('add', res.data)
+          commit('setHive', res.data)
         }
       })
   },
