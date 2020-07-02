@@ -24,6 +24,7 @@ export const mutations = {
 
   ADD_HIVE_TO_LOC(state, value) {
     state.locationHives.push(value)
+    // state.locationHives = value
     // console.table(state.locationHives)
   },
 
@@ -101,6 +102,7 @@ export const actions = {
       .then((res) => {
         res = res.data
         for (const element of res) {
+          // Für alle Locations (element = Eine Location)
           const promises = []
           for (const hive of element.hives) {
             // Für jeses Volk in der Location
@@ -110,10 +112,19 @@ export const actions = {
 
           Promise.all(promises)
             .then(function(results) {
+              console.log('Got results')
+              const locHive = {}
+              const hivesArr = []
               results.forEach(function(response) {
+                hivesArr.push(response.data)
+                // console.table(locHive)
                 response.data.locId = element._id
-                commit('ADD_HIVE_TO_LOC', response.data)
+
+                // commit('ADD_HIVE_TO_LOC', response.data)
               })
+              commit('ADD_HIVE_TO_LOC', locHive)
+              locHive[element._id] = hivesArr
+              console.table(locHive)
             })
             .catch((err) => {
               console.log(err)
