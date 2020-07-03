@@ -1,5 +1,5 @@
 <template>
-  <b-navbar type="dark" variant="dark" fixed="bottom" sticky="true">
+  <b-navbar type="dark" variant="dark" fixed="bottom" sticky>
     <b-navbar-nav class="ml-auto">
       <b-nav-item to="/impressum">
         Impressum

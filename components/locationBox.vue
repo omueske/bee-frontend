@@ -4,8 +4,10 @@
       ><b-col><br /></b-col
     ></b-row>
     <b-row>
-      <b-col>Standort: {{ loc.name }}</b-col
-      ><b-col><ButtonGroupLocation :locid="locid"/></b-col> </b-row
+      <b-col><ButtonGroupLocation :locid="locid"/></b-col>
+      <b-col
+        ><h4>Standort: {{ loc.name }}</h4></b-col
+      > </b-row
     ><b-row>
       <b-col><ButtonAddHive class="text-right" :locid="locid" /> </b-col>
     </b-row>
