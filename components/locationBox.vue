@@ -15,7 +15,7 @@
       <b-col>
         <b-row>
           <b-col v-for="hive in loc.hives" :key="hive._id" cols="3">
-            <hiveCard :hiveid="hive._id" />
+            <hiveCard :hiveid="hive._id" :locid="locid" />
           </b-col>
         </b-row>
       </b-col>

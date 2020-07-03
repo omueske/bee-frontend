@@ -27,6 +27,22 @@ export const mutations = {
     }
   },
 
+  DELETE_HIVE_FROM_LOCATION(state, hiveId) {
+    for (let i = 0; i < state.locationList.length; i++) {
+      let delHive = state.locationList[i].hives.findIndex(
+        (x) => x._id === hiveId
+      )
+
+      // Das löschen nur ausführen wenn mehr als 0 Elemente gefunden werden
+      // Ansonsten wird in jeder Location ein Element aus dem Store gelöscht
+      if (delHive > 0) {
+        console.log('Deleting in Loc: ' + state.locationList[i].name)
+        state.locationList[i].hives.splice(delHive, 1)
+        delHive = 0
+      }
+    }
+  },
+
   DELETE_LOCATION(state, location) {
     const delLocation = state.locationList.findIndex((x) => x._id === location)
     state.locationList.splice(delLocation, 1)
@@ -68,6 +84,17 @@ export const actions = {
       )
       .then((result) => {
         commit('ADD_HIVE_TO_LOCATION', payload)
+      })
+      .catch((error) => {
+        throw new Error(`API ${error}`)
+      })
+  },
+
+  async deleteHiveFromLocation({ commit }, hiveId) {
+    await axios
+      .delete('http://localhost:8080/api/v1/locations/unlink/' + hiveId)
+      .then((result) => {
+        commit('DELETE_HIVE_FROM_LOCATION', hiveId)
       })
       .catch((error) => {
         throw new Error(`API ${error}`)

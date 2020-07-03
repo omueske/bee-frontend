@@ -10,11 +10,18 @@
             footer-tag="footer"
             title=""
           >
-            <b-card-text
-              >Volk: {{ hive.number }}<br />Status:
+            <ButtonDeleteHive
+              class="text-right"
+              :hiveid="hiveid"
+              :locid="locid"
+            />
+
+            <b-card-text>
+              Volk: {{ hive.number }}<br />Status:
               {{ hive.status }}</b-card-text
             >
             <hr />
+            --> {{ locid }}
             <h5>Stockkarte</h5>
             <ButtonGroupHive />
           </b-card>
@@ -27,14 +34,20 @@
 <script>
 import { mapGetters } from 'vuex'
 import ButtonGroupHive from '@/components/ButtonGroupHive'
+import ButtonDeleteHive from '@/components/ButtonDeleteHive'
 
 export default {
   components: {
-    ButtonGroupHive
+    ButtonGroupHive,
+    ButtonDeleteHive
   },
 
   props: {
     hiveid: {
+      type: String,
+      required: true
+    },
+    locid: {
       type: String,
       required: true
     }
