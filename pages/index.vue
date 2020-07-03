@@ -27,13 +27,12 @@ export default {
   },
   computed: {
     ...mapState({
-      locationList: (state) => state.locations.locationsList,
+      locationList: (state) => state.locations.locationList,
       hivesList: (state) => state.hives.hivesList
     })
   },
   created() {
     this.$store.dispatch('hives/get')
-    this.$store.dispatch('locations/get')
     this.$store.dispatch('locations/getLocationsHives')
   }
 }

@@ -5,7 +5,7 @@
       fixed="top"
       type="dark"
       variant="secondary"
-      sticky="true"
+      sticky="'true'"
     >
       <b-navbar-brand href="#">BeeManager</b-navbar-brand>
 

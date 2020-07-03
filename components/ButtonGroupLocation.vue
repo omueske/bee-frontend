@@ -56,8 +56,6 @@ export default {
       this.stateLocName = null
     },
     handleOk(event) {
-      console.log('Event Called')
-      console.table(event)
       // Prevent modal from closing
       event.preventDefault()
 
@@ -68,7 +66,6 @@ export default {
           currentLoc = loc
         }
       }
-      console.table(currentLoc.hives.length)
       if (currentLoc.hives.length === 0) {
         // Dispatch to API
         this.deleteLocation(this.locid)

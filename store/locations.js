@@ -3,40 +3,37 @@ import axios from 'axios'
 
 export const state = () => ({
   currentLocation: String,
-  locationHives: [],
-  locationsList: []
+  locationList: []
 })
 
 export const mutations = {
-  SET_LOCATION(state, locations) {
-    state.locationsList = locations
+  SET_LOCATION_LIST(state, locations) {
+    state.locationList.push(locations)
   },
 
   SET_CURRENT_LOCATION(state, location) {
-    console.log('LOC_MUT: ' + location)
-    console.table(location.locid)
     state.currentLocation = location.locid
   },
 
   ADD_LOCATION(state, loc) {
-    state.locationsList.push(loc)
+    state.locationList.push(loc)
   },
 
-  ADD_HIVE_TO_LOC(state, value) {
-    state.locationHives.push(value)
-    // state.locationHives = value
-    // console.table(state.locationHives)
+  ADD_HIVE_TO_LOCATION(state, payload) {
+    for (let i = 0; i < state.locationList.length; i++) {
+      if (state.locationList[i]._id === payload.location) {
+        state.locationList[i].hives.push(payload.hiveObj)
+      }
+    }
   },
 
   DELETE_LOCATION(state, location) {
-    console.table(location)
-    const delLocation = state.locationsList.findIndex((x) => x._id === location)
-    state.locationsList.splice(delLocation, 1)
+    const delLocation = state.locationList.findIndex((x) => x._id === location)
+    state.locationList.splice(delLocation, 1)
   }
 }
 export const actions = {
   setCurrentLoc({ commit }, locid) {
-    console.table(locid)
     commit('SET_CURRENT_LOCATION', locid)
   },
 
@@ -45,13 +42,12 @@ export const actions = {
       .get('http://localhost:8080/api/v1/locations')
       .then((res) => {
         if (res.status === 200) {
-          commit('SET_LOCATION', res.data)
+          commit('SET_LOCATION_LIST', res.data)
         }
       })
   },
 
   async addLocation({ commit }, data) {
-    console.table(data.latitude)
     await axios
       .post('http://localhost:8080/api/v1/locations', data)
       .then((result) => {
@@ -63,8 +59,6 @@ export const actions = {
   },
 
   async addHiveToLocation({ commit }, payload) {
-    console.log('Loc: ' + payload.location)
-    console.log('HiveLoc: ' + payload.hive)
     await axios
       .post(
         'http://localhost:8080/api/v1/locations/' +
@@ -73,8 +67,7 @@ export const actions = {
           payload.hive
       )
       .then((result) => {
-        console.log(result.data)
-        // commit('DELETE_LOCATION', payload)
+        commit('ADD_HIVE_TO_LOCATION', payload)
       })
       .catch((error) => {
         throw new Error(`API ${error}`)
@@ -82,11 +75,9 @@ export const actions = {
   },
 
   async deleteLocation({ commit }, payload) {
-    console.log('Payload ' + payload)
     await axios
       .delete('http://localhost:8080/api/v1/locations/' + payload)
       .then((result) => {
-        console.log(result.data)
         commit('DELETE_LOCATION', payload)
       })
       .catch((error) => {
@@ -95,8 +86,6 @@ export const actions = {
   },
 
   async getLocationsHives({ commit }) {
-    console.log('getLocationsHives called ')
-
     return await axios
       .get(`http://localhost:8080/api/v1/locations`) // Returns all locations
       .then((res) => {
@@ -106,25 +95,22 @@ export const actions = {
           const promises = []
           for (const hive of element.hives) {
             // Für jeses Volk in der Location
-            console.log('Calling: ' + `http://localhost:8080` + hive.href)
             promises.push(axios.get(`http://localhost:8080` + hive.href))
           }
 
           Promise.all(promises)
             .then(function(results) {
-              console.log('Got results')
-              const locHive = {}
+              let locHive = {}
               const hivesArr = []
               results.forEach(function(response) {
                 hivesArr.push(response.data)
-                // console.table(locHive)
                 response.data.locId = element._id
-
-                // commit('ADD_HIVE_TO_LOC', response.data)
               })
-              commit('ADD_HIVE_TO_LOC', locHive)
-              locHive[element._id] = hivesArr
-              console.table(locHive)
+              // Delete hrefs to hives so that they can be replacec by Hive-Objects
+              delete element.hives
+              locHive = element
+              locHive.hives = hivesArr
+              commit('SET_LOCATION_LIST', locHive)
             })
             .catch((err) => {
               console.log(err)
@@ -135,7 +121,7 @@ export const actions = {
 }
 export const getters = {
   getLocById: (state) => (id) => {
-    return state.locationsList.find((locId) => locId._id === id)
+    return state.locationList.find((locId) => locId._id === id)
   },
   getHivesByLoc: (state) => (id) => {}
 }

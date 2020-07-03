@@ -4,15 +4,16 @@
       ><b-col><br /></b-col
     ></b-row>
     <b-row>
-      <b-col>Standort: {{ loc.name }}</b-col>
+      <b-col>Standort: {{ loc.name }}</b-col
+      ><b-col><ButtonGroupLocation :locid="locid"/></b-col> </b-row
+    ><b-row>
       <b-col><ButtonAddHive class="text-right" :locid="locid" /> </b-col>
-      <b-col><ButtonGroupLocation :locid="locid"/></b-col
-    ></b-row>
+    </b-row>
     <b-row class="mb-3">
       <b-col>
         <b-row>
           <b-col v-for="hive in loc.hives" :key="hive._id" cols="3">
-            <hiveCard :hiveid="hive.hiveId" />
+            <hiveCard :hiveid="hive._id" />
           </b-col>
         </b-row>
       </b-col>
@@ -44,7 +45,6 @@ export default {
     ...mapActions('locations', ['deleteLocation']),
 
     loc() {
-      // console.log(this.getLocById(this.locid))
       return this.getLocById(this.locid)
     }
   }
