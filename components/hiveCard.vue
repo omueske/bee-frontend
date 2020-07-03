@@ -10,18 +10,13 @@
             footer-tag="footer"
             title=""
           >
-            <ButtonDeleteHive
-              class="text-right"
-              :hiveid="hiveid"
-              :locid="locid"
-            />
+            <ButtonDeleteHive class="text-right" :hiveid="hiveid" />
 
             <b-card-text>
               Volk: {{ hive.number }}<br />Status:
               {{ hive.status }}</b-card-text
             >
             <hr />
-            --> {{ locid }}
             <h5>Stockkarte</h5>
             <ButtonGroupHive />
           </b-card>
@@ -44,10 +39,6 @@ export default {
 
   props: {
     hiveid: {
-      type: String,
-      required: true
-    },
-    locid: {
       type: String,
       required: true
     }

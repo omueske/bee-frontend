@@ -14,7 +14,7 @@
         @show="resetModal"
         @ok="handleOk"
       >
-        LOC: {{ locid }} Hice: {{ hiveid }}
+        Hive: {{ hiveid }}
         <template v-slot:modal-footer="{ ok, cancel }">
           <b-button size="sm" variant="danger" @click="ok()">
             Löschen
@@ -33,10 +33,6 @@ import { mapActions, mapState } from 'vuex'
 export default {
   props: {
     hiveid: {
-      type: String,
-      required: true
-    },
-    locid: {
       type: String,
       required: true
     }
@@ -58,7 +54,6 @@ export default {
       // Prevent modal from closing
       event.preventDefault()
 
-      // const payload = { locId: this.locid, hiveId: this.hiveid }
       console.log(this.hiveid)
       this.deleteHiveFromLocation(this.hiveid)
 
