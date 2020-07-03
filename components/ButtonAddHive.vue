@@ -99,19 +99,17 @@ export default {
       this.stateLocName = null
     },
     async handleOk(event) {
-      // console.log('Event Called')
-      // console.table(event)
       // Prevent modal from closing
       event.preventDefault()
 
       // Dispatch to API
-      // console.log('Hive: ' + this.hive)
-      // console.table(this.hive)
       await this.addHive(this.hive)
-      console.log('sh----> ' + this.stateHive._id)
-      console.log('loc----> ' + this.locid)
-      const payload = { location: this.locid, hive: this.stateHive._id }
-      console.table(payload)
+      const payload = {
+        location: this.locid,
+        hive: this.stateHive._id,
+        hiveObj: this.stateHive
+      }
+
       await this.addHiveToLocation(payload)
       // unset values to avoid vuex state manipulation errors
       this.hive = {
@@ -123,10 +121,8 @@ export default {
       }
       // Hide the modal manually
       this.$nextTick(() => {
-        // console.log('LOCID: ' + this.locid)
         this.$bvModal.hide('modal-add-hive-' + this.locid)
       })
-      window.location.reload()
     },
     updateField(field, value) {
       this.hive[field] = value
