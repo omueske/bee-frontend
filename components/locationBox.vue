@@ -6,7 +6,7 @@
     <b-row>
       <b-col><ButtonGroupLocation :locid="locid"/></b-col>
       <b-col
-        ><h4>Standort: {{ loc.name }}</h4></b-col
+        ><h5>{{ loc.name }}</h5></b-col
       > </b-row
     ><b-row>
       <b-col><ButtonAddHive class="text-right" :locid="locid" /> </b-col>

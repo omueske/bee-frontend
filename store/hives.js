@@ -24,7 +24,7 @@ export const mutations = {
 export const actions = {
   async addHive({ commit }, params) {
     await this.$axios
-      .post('http://localhost:8080/api/v1/hives', params)
+      .post(this.$axios.defaults.baseURL + '/api/v1/hives', params)
       .then((res) => {
         if (res.status === 200) {
           commit('add', res.data)
@@ -33,15 +33,17 @@ export const actions = {
       })
   },
   async get({ commit }) {
-    await this.$axios.get('http://localhost:8080/api/v1/hives').then((res) => {
-      if (res.status === 200) {
-        commit('set', res.data)
-      }
-    })
+    await this.$axios
+      .get(this.$axios.defaults.baseURL + '/api/v1/hives')
+      .then((res) => {
+        if (res.status === 200) {
+          commit('set', res.data)
+        }
+      })
   },
   async show({ commit }, params) {
     await this.$axios
-      .get(`http://localhost:8080/api/v1/hives/${params.id}`)
+      .get(this.$axios.defaults.baseURL + `/api/v1/hives/${params.id}`)
       .then((res) => {
         if (res.status === 200) {
           commit('setHive', res.data)
@@ -54,7 +56,7 @@ export const actions = {
 
   async getHive({ commit }, params) {
     return await axios
-      .get(`http://localhost:8080/api/v1/hives/${params}`)
+      .get(this.$axios.defaults.baseURL + `/api/v1/hives/${params}`)
       .then((res) => {
         commit('setHive', res.data)
       })

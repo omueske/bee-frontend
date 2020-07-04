@@ -48,7 +48,6 @@ export default {
     ...mapGetters('hives', ['getHiveById']),
 
     hive() {
-      console.log(this.getHiveById(this.hiveid))
       return this.getHiveById(this.hiveid)
     }
   }

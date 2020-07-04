@@ -55,7 +55,7 @@ export const actions = {
 
   async get({ commit }) {
     await this.$axios
-      .get('http://localhost:8080/api/v1/locations')
+      .get(this.$axios.defaults.baseURL + '/api/v1/locations')
       .then((res) => {
         if (res.status === 200) {
           commit('SET_LOCATION_LIST', res.data)
@@ -65,7 +65,7 @@ export const actions = {
 
   async addLocation({ commit }, data) {
     await axios
-      .post('http://localhost:8080/api/v1/locations', data)
+      .post(this.$axios.defaults.baseURL + '/api/v1/locations', data)
       .then((result) => {
         commit('ADD_LOCATION', result.data)
       })
@@ -77,10 +77,7 @@ export const actions = {
   async addHiveToLocation({ commit }, payload) {
     await axios
       .post(
-        'http://localhost:8080/api/v1/locations/' +
-          payload.location +
-          '/' +
-          payload.hive
+        this.$axios.defaults.baseURL + payload.location + '/' + payload.hive
       )
       .then((result) => {
         commit('ADD_HIVE_TO_LOCATION', payload)
@@ -92,7 +89,9 @@ export const actions = {
 
   async deleteHiveFromLocation({ commit }, hiveId) {
     await axios
-      .delete('http://localhost:8080/api/v1/locations/unlink/' + hiveId)
+      .delete(
+        this.$axios.defaults.baseURL + '/api/v1/locations/unlink/' + hiveId
+      )
       .then((result) => {
         commit('DELETE_HIVE_FROM_LOCATION', hiveId)
       })
@@ -103,7 +102,7 @@ export const actions = {
 
   async deleteLocation({ commit }, payload) {
     await axios
-      .delete('http://localhost:8080/api/v1/locations/' + payload)
+      .delete(this.$axios.defaults.baseURL + '/' + payload)
       .then((result) => {
         commit('DELETE_LOCATION', payload)
       })
@@ -113,8 +112,9 @@ export const actions = {
   },
 
   async getLocationsHives({ commit }) {
+    console.log(this.$axios.defaults.baseURL)
     return await axios
-      .get(`http://localhost:8080/api/v1/locations`) // Returns all locations
+      .get(this.$axios.defaults.baseURL + '/api/v1/locations') // Returns all locations
       .then((res) => {
         res = res.data
         for (const element of res) {
@@ -122,7 +122,7 @@ export const actions = {
           const promises = []
           for (const hive of element.hives) {
             // Für jeses Volk in der Location
-            promises.push(axios.get(`http://localhost:8080` + hive.href))
+            promises.push(axios.get(this.$axios.defaults.baseURL + hive.href))
           }
 
           Promise.all(promises)
