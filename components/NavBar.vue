@@ -23,6 +23,12 @@
           <b-dropdown-item href="#">Neuer Standort</b-dropdown-item>
           <b-dropdown-item href="#">Standort bearbeiten</b-dropdown-item>
         </b-nav-item-dropdown>
+        <b-nav-item-dropdown left>
+          <!-- Using button-content slot -->
+          <template slot="button-content"><em>Königinen</em></template>
+          <b-dropdown-item to="/queens/new">Neue Königin</b-dropdown-item>
+          <b-dropdown-item to="/queens">Königinnen anzeigen</b-dropdown-item>
+        </b-nav-item-dropdown>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
@@ -44,6 +50,10 @@
     </b-navbar>
   </div>
 </template>
+
+<script>
+export default {}
+</script>
 
 <style scoped>
 .brand {
