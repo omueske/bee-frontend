@@ -77,13 +77,24 @@ export const actions = {
   async addHiveToLocation({ commit }, payload) {
     await axios
       .post(
-        this.$axios.defaults.baseURL + payload.location + '/' + payload.hive
+        this.$axios.defaults.baseURL +
+          '/api/v1/locations/' +
+          payload.location +
+          '/' +
+          payload.hive
       )
       .then((result) => {
         commit('ADD_HIVE_TO_LOCATION', payload)
       })
       .catch((error) => {
-        throw new Error(`API ${error}`)
+        console.log(
+          this.$axios.defaults.baseURL +
+            '/api/v1/locations/' +
+            payload.location +
+            '/' +
+            payload.hive
+        )
+        throw new Error(`API H2L ${error}`)
       })
   },
 
