@@ -13,8 +13,8 @@ export const mutations = {
   ADD_QUEEN(state, queen) {
     state.queenList.push(queen)
   },
-  REMOVE_QUEENS(state, { queen }) {
-    state.hivesList.splice(state.hivesList.indexOf(queen), 1)
+  REMOVE_QUEEN(state, { queen }) {
+    state.queenList.splice(state.queenList.indexOf(queen), 1)
   },
   SET_SELECTED_QUEEN(state, queen) {
     state.selectedQueen = queen
@@ -46,10 +46,21 @@ export const actions = {
     return await axios
       .get(this.$axios.defaults.baseURL + `/api/v1/queens/${params}`)
       .then((res) => {
-        commit('setSelectedQueen', res.data)
+        commit('SET_SELECTED_QUEEN', res.data)
       })
       .catch((err) => {
         console.log(err)
+      })
+  },
+
+  async deleteQueen({ commit }, queenId) {
+    return await axios
+      .delete(this.$axios.defaults.baseURL + '/api/v1/queens/' + queenId)
+      .then((result) => {
+        commit('REMOVE_QUEEN', queenId)
+      })
+      .catch((err) => {
+        console.log('API-ERROR:' + err)
       })
   }
 }
