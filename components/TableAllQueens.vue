@@ -6,7 +6,6 @@
     <b-row>
       <b-col>
         <b-table hover :items="queenList" :fields="fields">
-          <!-- <template slot="isMember" slot-scope="{ item: { deleteQueen } }"> -->
           <template v-slot:cell(deleteQueen)="data">
             <ButtonDeleteQueen :queenid="data.item._id" />
             {{ data.item._id }}
@@ -58,7 +57,6 @@ export default {
   },
   computed: {
     ...mapState({
-      stateQueen: (state) => state.queens.selectedQueen,
       queenList: (state) => state.queens.queenList
     })
   }
