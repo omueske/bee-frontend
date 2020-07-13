@@ -82,11 +82,15 @@ export const actions = {
       .catch((err) => {
         console.log('API-ERROR:' + err)
       })
+  },
+  agetQueenById(queen) {
+    return this.getQueenById(queen)
   }
 }
 
 export const getters = {
   getQueenById: (state) => (id) => {
+    console.log(state.queenList.find((queenId) => queenId._id === id))
     return state.queenList.find((queenId) => queenId._id === id)
   }
 }

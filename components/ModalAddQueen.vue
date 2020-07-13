@@ -11,27 +11,27 @@
       <b-form-group id="number" label="Nummer der Königin" label-for="number">
         <b-form-input
           id="number"
-          :value="this.queen.number"
+          :value="queen.number"
           @input="updateField('number', $event)"
         />
       </b-form-group>
       <b-form-group id="hatchYear" label="Schlupfjahr" label-for="hatchYear">
         <b-form-input
           id="hatchYear"
-          :value="this.queen.hatchYear"
+          :value="queen.hatchYear"
           @input="updateField('hatchYear', $event)"
         />
       </b-form-group>
       <b-form-group id="pedigree" label="Abstammung" label-for="pedigree">
         <b-form-input
           id="pedigree"
-          :value="this.queen.pedigree"
+          :value="queen.pedigree"
           @input="updateField('pedigree', $event)"
       /></b-form-group>
       <b-form-group id="comment" label="Kommentar:" label-for="comment">
         <b-form-input
           id="comment"
-          :value="this.queen.comment"
+          :value="queen.comment"
           @input="updateField('comment', $event)"
         />
       </b-form-group>

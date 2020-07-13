@@ -6,9 +6,10 @@
     <b-row>
       <b-col>
         <b-table hover :items="queenList" :fields="fields">
+          <template v-slot:cell(hive)="data">
+            {{ getHiveNameByQueenId(data.item._id) }}
+          </template>
           <template v-slot:cell(queenActions)="data">
-            <!-- <ButtonDeleteQueen :queenid="data.item._id" />
-            <ButtonModifyQueen :queenid="data.item._id" /> -->
             <ButtonGroupQueen :queenid="data.item._id" />
             {{ data.item._id }}
           </template>
@@ -58,13 +59,12 @@ export default {
       ]
     }
   },
+
   computed: {
     ...mapState({
       queenList: (state) => state.queens.queenList
-    })
-  },
-  methods: {
-    ...mapGetters('hives', ['getHiveByQueenId'])
+    }),
+    ...mapGetters('hives', ['getHiveNameByQueenId'])
   }
 }
 </script>

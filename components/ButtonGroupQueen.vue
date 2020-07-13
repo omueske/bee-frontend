@@ -2,8 +2,9 @@
   <b-row>
     <b-col>
       <b-button-group size="sm">
-        <ButtonModifyQueen :queenid="this.queenid" />
-        <ButtonDeleteQueen :queenid="this.queenid" />
+        <ButtonMoveQueen />
+        <ButtonModifyQueen :queenid="queenid" />
+        <ButtonDeleteQueen :queenid="queenid" />
       </b-button-group>
     </b-col>
   </b-row>
@@ -12,11 +13,13 @@
 <script>
 import ButtonDeleteQueen from '@/components/ButtonDeleteQueen'
 import ButtonModifyQueen from '@/components/ButtonModifyQueen'
+import ButtonMoveQueen from '@/components/ButtonMoveQueen'
 
 export default {
   components: {
     ButtonDeleteQueen,
-    ButtonModifyQueen
+    ButtonModifyQueen,
+    ButtonMoveQueen
   },
   props: {
     queenid: {

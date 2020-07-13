@@ -90,14 +90,63 @@ export const actions = {
       .catch((err) => {
         console.log(err)
       })
+  },
+  agetQueenByQueenId: (state) => async (id) => {
+    const hive = await state.hivesList.find((hive) => hive.queen._id === id)
+    console.log('---> ' + hive)
+    return hive
   }
+
+  // async getHiveQueen({ commit }) {
+  //   console.log(this.$axios.defaults.baseURL)
+  //   return await axios
+  //     .get(this.$axios.defaults.baseURL + '/api/v1/hives') // Returns all locations
+  //     .then((res) => {
+  //       res = res.data
+  //       for (const element of res) {
+  //         // Für alle Locations (element = Eine Location)
+  //         const promises = []
+  //         for (const queen of element.queens) {
+  //           // Für jede Königin im Volk
+  //           promises.push(axios.get(this.$axios.defaults.baseURL + queen.href))
+  //         }
+
+  //         Promise.all(promises)
+  //           .then(function(results) {
+  //             let hiveQueen = {}
+  //             const queensArr = []
+  //             results.forEach(function(response) {
+  //               queensArr.push(response.data)
+  //               response.data.hiveId = element._id
+  //             })
+  //             // Delete hrefs to hives so that they can be replacec by Hive-Objects
+  //             delete element.queens
+  //             hiveQueen = element
+  //             hiveQueen.queens = queensArr
+  //             commit('add', hiveQueen)
+  //           })
+  //           .catch((err) => {
+  //             console.log(err)
+  //           })
+  //       }
+  //     })
+  // }
 }
 
 export const getters = {
   getHiveById: (state) => (id) => {
     return state.hivesList.find((hiveId) => hiveId._id === id)
   },
-  getHiveByQueenId: (state) => (id) => {
-    return state.hivesList.find((hive) => hive.queen._id === id)
+  getHiveNameByQueenId: (state) => (id) => {
+    let erg = {}
+    erg.name = 'not set'
+    erg = state.hivesList.find((hive) =>
+      hive.queen.find((queen) => queen.queenId === id)
+    )
+    console.log(erg)
+    if (!erg) {
+      return 'Kein Volk'
+    }
+    return erg.name
   }
 }
