@@ -86,13 +86,7 @@ export default {
       await this.updateQueen(this.queen)
 
       // unset values to avoid vuex state manipulation errors
-      this.queen = {
-        _id: '',
-        number: '',
-        hatchYear: '',
-        pedigree: '',
-        comment: ''
-      }
+      this.queen = {}
 
       for (const q in this.queen) {
         Vue.delete(q)

@@ -2,8 +2,8 @@
   <b-row>
     <b-col>
       <b-button-group size="sm">
-        <ButtonDeleteQueen :queenid="this.queenid" />
         <ButtonModifyQueen :queenid="this.queenid" />
+        <ButtonDeleteQueen :queenid="this.queenid" />
       </b-button-group>
     </b-col>
   </b-row>
