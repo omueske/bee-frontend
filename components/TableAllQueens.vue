@@ -6,8 +6,10 @@
     <b-row>
       <b-col>
         <b-table hover :items="queenList" :fields="fields">
-          <template v-slot:cell(deleteQueen)="data">
-            <ButtonDeleteQueen :queenid="data.item._id" />
+          <template v-slot:cell(queenActions)="data">
+            <!-- <ButtonDeleteQueen :queenid="data.item._id" />
+            <ButtonModifyQueen :queenid="data.item._id" /> -->
+            <ButtonGroupQueen :queenid="data.item._id" />
             {{ data.item._id }}
           </template>
         </b-table>
@@ -17,12 +19,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import ButtonDeleteQueen from '@/components/ButtonDeleteQueen'
+import { mapState, mapGetters } from 'vuex'
+import ButtonGroupQueen from '@/components/ButtonGroupQueen'
 
 export default {
   components: {
-    ButtonDeleteQueen
+    ButtonGroupQueen
   },
   data() {
     return {
@@ -51,7 +53,8 @@ export default {
           label: 'Kommentar',
           sortable: false
         },
-        { key: 'deleteQueen', label: 'Löschen', sortable: false }
+        { key: 'hive', label: 'Volk', sortable: true },
+        { key: 'queenActions', label: 'Aktionen', sortable: false }
       ]
     }
   },
@@ -59,6 +62,9 @@ export default {
     ...mapState({
       queenList: (state) => state.queens.queenList
     })
+  },
+  methods: {
+    ...mapGetters('hives', ['getHiveByQueenId'])
   }
 }
 </script>

@@ -1,102 +1,23 @@
 <template
   ><div>
     <b-button
-      v-b-modal="'modal-add-queen'"
+      v-b-modal.ModalAddQueen
       pill
       variant="outline-secondary"
       size="sm"
     >
       Neue Königin anlegen
     </b-button>
-
-    <b-modal
-      :id="'modal-add-queen'"
-      ref="modal"
-      title="Neues Königin anlegen"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
-    >
-      <form ref="addQueenForm">
-        <b-form-group id="number" label="Nummer der Königin" label-for="number">
-          <b-form-input
-            id="number"
-            :value="queen.number"
-            @input="updateField('number', $event)"
-          />
-        </b-form-group>
-        <b-form-group id="hatchYear" label="Schlupfjahr" label-for="hatchYear">
-          <b-form-input
-            id="hatchYear"
-            :value="queen.hatchYear"
-            @input="updateField('hatchYear', $event)"
-          />
-        </b-form-group>
-        <b-form-group id="pedigree" label="Abstammung" label-for="pedigree">
-          <b-form-input
-            id="pedigree"
-            :value="queen.pedigree"
-            @input="updateField('pedigree', $event)"
-        /></b-form-group>
-        <b-form-group id="comment" label="Kommentar:" label-for="comment">
-          <b-form-input
-            id="comment"
-            :value="queen.comment"
-            @input="updateField('comment', $event)"
-          />
-        </b-form-group>
-      </form>
-    </b-modal>
+    <ModalAddQueen />
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import ModalAddQueen from '@/components/ModalAddQueen'
 
 export default {
-  props: {},
-  data() {
-    return {
-      queen: {
-        number: '',
-        hatchYear: '',
-        pedigree: '',
-        comment: ''
-      }
-    }
-  },
-  computed: {
-    ...mapState({
-      stateQueen: (state) => state.queens.selectedQueen
-    })
-  },
-  methods: {
-    ...mapActions('queens', ['addQueen']),
-    resetModal() {
-      this.stateLocName = null
-    },
-    async handleOk(event) {
-      // Prevent modal from closing
-      event.preventDefault()
-
-      // Dispatch to API
-      await this.addQueen(this.queen)
-
-      // unset values to avoid vuex state manipulation errors
-      this.queen = {
-        number: '',
-        hatchYear: '',
-        pedgree: '',
-        comment: ''
-      }
-      // Hide the modal manually
-      this.$nextTick(() => {
-        this.$bvModal.hide('modal-add-queen')
-      })
-    },
-    updateField(field, value) {
-      this.queen[field] = value
-    }
+  components: {
+    ModalAddQueen
   }
 }
 </script>

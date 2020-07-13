@@ -18,6 +18,10 @@ export const mutations = {
   },
   SET_SELECTED_QUEEN(state, queen) {
     state.selectedQueen = queen
+  },
+  UPDATE_QUEEN(state, queen) {
+    const newQueen = state.queenList.find((q) => q._id === queen._id)
+    Object.assign(newQueen, queen)
   }
 }
 
@@ -58,6 +62,22 @@ export const actions = {
       .delete(this.$axios.defaults.baseURL + '/api/v1/queens/' + queenId)
       .then((result) => {
         commit('REMOVE_QUEEN', queenId)
+      })
+      .catch((err) => {
+        console.log('API-ERROR:' + err)
+      })
+  },
+
+  unsetSelectedQueen({ commit }) {
+    commit('SET_SELECTED_QUEEN', null)
+  },
+
+  async updateQueen({ commit }, queen) {
+    console.table(queen)
+    return await axios
+      .put(this.$axios.defaults.baseURL + '/api/v1/queens/' + queen._id, queen)
+      .then((result) => {
+        commit('UPDATE_QUEEN', queen)
       })
       .catch((err) => {
         console.log('API-ERROR:' + err)
