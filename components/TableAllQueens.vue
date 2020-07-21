@@ -11,7 +11,6 @@
           </template>
           <template v-slot:cell(queenActions)="data">
             <ButtonGroupQueen :queenid="data.item._id" />
-            {{ data.item._id }}
           </template>
         </b-table>
       </b-col>

@@ -1,9 +1,29 @@
 <template>
   <div>
-    <b-button variant="outline-secondary" pill size="sm">
+    <b-button
+      v-b-modal="'ModalMoveQueen-' + queenid"
+      variant="outline-secondary"
+      pill
+      size="sm"
+    >
       <b-icon-arrow-right-circle />
     </b-button>
+    <ModalMoveQueen :queenid="queenid" />
   </div>
 </template>
 
-<script></script>
+<script>
+import ModalMoveQueen from '@/components/ModalMoveQueen'
+
+export default {
+  components: {
+    ModalMoveQueen
+  },
+  props: {
+    queenid: {
+      type: String,
+      required: true
+    }
+  }
+}
+</script>

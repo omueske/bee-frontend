@@ -6,7 +6,6 @@
     @hidden="resetModal"
     @ok="handleOk"
   >
-    {{ stateSelectedQueen._id }}
     <form ref="addQueenForm">
       <b-form-group id="number" label="Nummer der Königin" label-for="number">
         <b-form-input
@@ -41,20 +40,11 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import Vue from 'vue'
 
 export default {
-  props: {},
-
   data() {
     return {
-      queen: {
-        // _id: '',
-        // number: '',
-        // hatchYear: '',
-        // pedigree: '',
-        // comment: ''
-      }
+      queen: {}
     }
   },
   computed: {
@@ -67,19 +57,12 @@ export default {
     ...mapActions('queens', ['updateQueen']),
 
     resetModal() {
-      console.log('Reseting Store')
+      // Is there anything todo?
     },
     async handleOk(event) {
       // Prevent modal from closing
       event.preventDefault()
 
-      //   const queen = {
-      //     _id: this.stateSelectedQueen._id,
-      //     number: this.queen.number,
-      //     hatchYear: this.queen.hatchYear,
-      //     pedgree: this.queen.pedgree,
-      //     comment: this.queen.comment
-      //   }
       this.queen._id = this.stateSelectedQueen._id
       console.table(this.queen)
       // Dispatch to API
@@ -88,9 +71,6 @@ export default {
       // unset values to avoid vuex state manipulation errors
       this.queen = {}
 
-      for (const q in this.queen) {
-        Vue.delete(q)
-      }
       // Hide the modal manually
       this.$nextTick(() => {
         this.$bvModal.hide('ModalModifyQueen')
