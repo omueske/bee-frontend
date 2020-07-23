@@ -69,13 +69,6 @@ export const actions = {
       .then((res) => {
         if (res.status === 200) {
           commit('set', res.data)
-          const hives = []
-          for (const item in res.data) {
-            if (item.queen.length > 0) {
-              hives.push(item)
-            }
-          }
-          commit('LOAD_HIVE_QUEENS', hives)
         }
       })
   },

@@ -53,6 +53,7 @@ export default {
         number: '',
         hatchYear: '',
         pedigree: '',
+        race: '',
         comment: ''
       }
     }
@@ -81,6 +82,7 @@ export default {
         number: '',
         hatchYear: '',
         pedgree: '',
+        race: '',
         comment: ''
       }
 
