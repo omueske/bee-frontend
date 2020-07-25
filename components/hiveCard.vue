@@ -18,7 +18,7 @@
             >
             <hr />
             <h5>Stockkarte</h5>
-            <ButtonGroupHive />
+            <ButtonGroupHiveLog />
           </b-card>
         </b-col>
       </b-row>
@@ -28,12 +28,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import ButtonGroupHive from '@/components/ButtonGroupHive'
+import ButtonGroupHiveLog from '@/components/ButtonGroupHiveLog'
 import ButtonDeleteHive from '@/components/ButtonDeleteHive'
 
 export default {
   components: {
-    ButtonGroupHive,
+    ButtonGroupHiveLog,
     ButtonDeleteHive
   },
 

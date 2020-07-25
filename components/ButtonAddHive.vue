@@ -51,7 +51,7 @@
             :options="options"
             size="sm"
             class="mt-3"
-            @click="updateField('status', $event)"
+            @change="updateField('status', $event)"
           ></b-form-select
         ></b-form-group>
       </form>

@@ -7,7 +7,7 @@
     @ok="handleOk"
   >
     {{ stateQueen._id }}
-    <form ref="addQueenForm">
+    <form ref="createQueenForm">
       <b-form-group id="number" label="Nummer der Königin" label-for="number">
         <b-form-input
           id="number"
@@ -35,6 +35,18 @@
           @input="updateField('comment', $event)"
         />
       </b-form-group>
+      <b-form-group id="hive" label="Volk:" label-for="hive">
+        <b-form-select id="hive" :value="hiveId" @change="updateHiveId($event)">
+          <option
+            v-for="hive in stateHivesList"
+            :key="hive._id"
+            :value="hive._id"
+          >
+            {{ hive.name }}
+          </option>
+          ></b-form-select
+        >
+      </b-form-group>
     </form>
   </b-modal>
 </template>
@@ -52,19 +64,22 @@ export default {
       queen: {
         number: '',
         hatchYear: '',
+        race: '',
         pedigree: '',
         comment: ''
-      }
+      },
+      hiveId: ''
     }
   },
   computed: {
     ...mapState({
-      stateQueen: (state) => state.queens.selectedQueen
+      stateQueen: (state) => state.queens.selectedQueen,
+      stateHivesList: (state) => state.hives.hivesList
     })
   },
 
   methods: {
-    ...mapActions('queens', ['addQueen']),
+    ...mapActions('hives', ['createQueen']),
 
     resetModal() {
       console.log('Reseting Store')
@@ -73,13 +88,15 @@ export default {
       // Prevent modal from closing
       event.preventDefault()
 
+      const payload = { queen: this.queen, hiveId: this.hiveId }
       // Dispatch to API
-      await this.addQueen(this.queen)
+      await this.createQueen(payload)
 
       // unset values to avoid vuex state manipulation errors
       this.queen = {
         number: '',
         hatchYear: '',
+        race: '',
         pedgree: '',
         comment: ''
       }
@@ -91,6 +108,10 @@ export default {
     },
     updateField(field, value) {
       this.queen[field] = value
+    },
+    updateHiveId(id) {
+      console.log('--->' + id)
+      this.hiveId = id
     }
   }
 }

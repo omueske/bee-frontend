@@ -33,6 +33,16 @@ export const mutations = {
         delQueen = 0
       }
     }
+  },
+  ADD_QUEEN(state, payload) {
+    console.log('payload: ' + payload)
+    console.log('hiveId: ' + payload.hive)
+    console.log('queen: ' + payload.queen)
+    for (let i = 0; i < state.hivesList.length; i++) {
+      if (state.hivesList[i] === payload.hive) {
+        state.hivesList[i].queen.push(payload.queen)
+      }
+    }
   }
 }
 
@@ -47,6 +57,16 @@ export const actions = {
         }
       })
   },
+  async deleteHive({ commit }, params) {
+    console.log('--->' + params)
+    await this.$axios
+      .delete(this.$axios.defaults.baseURL + '/api/v1/hives/' + params)
+      .then((res) => {
+        if (res.status === 200) {
+          commit('remove', res.data)
+        }
+      })
+  },
   async get({ commit }) {
     await this.$axios
       .get(this.$axios.defaults.baseURL + '/api/v1/hives')
@@ -56,9 +76,10 @@ export const actions = {
         }
       })
   },
-  async show({ commit }, params) {
+  async setSelectedHive({ commit }, params) {
+    console.log('params: ' + params)
     await this.$axios
-      .get(this.$axios.defaults.baseURL + `/api/v1/hives/${params.id}`)
+      .get(this.$axios.defaults.baseURL + `/api/v1/hives/${params}`)
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data)
@@ -95,42 +116,24 @@ export const actions = {
     const hive = await state.hivesList.find((hive) => hive.queen._id === id)
     console.log('---> ' + hive)
     return hive
+  },
+
+  async createQueen({ commit }, payload) {
+    console.log(payload)
+    const hive = {}
+    hive.queen = payload.queen
+    await this.$axios
+      .put(
+        this.$axios.defaults.baseURL + '/api/v1/hives/queen/' + payload.hiveId,
+        hive
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data)
+          commit('ADD_QUEEN', res.data)
+        }
+      })
   }
-
-  // async getHiveQueen({ commit }) {
-  //   console.log(this.$axios.defaults.baseURL)
-  //   return await axios
-  //     .get(this.$axios.defaults.baseURL + '/api/v1/hives') // Returns all locations
-  //     .then((res) => {
-  //       res = res.data
-  //       for (const element of res) {
-  //         // Für alle Locations (element = Eine Location)
-  //         const promises = []
-  //         for (const queen of element.queens) {
-  //           // Für jede Königin im Volk
-  //           promises.push(axios.get(this.$axios.defaults.baseURL + queen.href))
-  //         }
-
-  //         Promise.all(promises)
-  //           .then(function(results) {
-  //             let hiveQueen = {}
-  //             const queensArr = []
-  //             results.forEach(function(response) {
-  //               queensArr.push(response.data)
-  //               response.data.hiveId = element._id
-  //             })
-  //             // Delete hrefs to hives so that they can be replacec by Hive-Objects
-  //             delete element.queens
-  //             hiveQueen = element
-  //             hiveQueen.queens = queensArr
-  //             commit('add', hiveQueen)
-  //           })
-  //           .catch((err) => {
-  //             console.log(err)
-  //           })
-  //       }
-  //     })
-  // }
 }
 
 export const getters = {

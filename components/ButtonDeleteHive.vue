@@ -46,6 +46,7 @@ export default {
 
   methods: {
     ...mapActions('locations', ['deleteHiveFromLocation']),
+    ...mapActions('hives', ['deleteHive']),
 
     resetModal() {
       this.stateLocName = null
@@ -56,6 +57,7 @@ export default {
 
       console.log(this.hiveid)
       this.deleteHiveFromLocation(this.hiveid)
+      this.deleteHive(this.hiveid)
 
       // Hide the modal manually
       this.$nextTick(() => {

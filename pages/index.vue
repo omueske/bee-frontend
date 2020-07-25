@@ -27,8 +27,8 @@ export default {
   },
   computed: {
     ...mapState({
-      locationList: (state) => state.locations.locationList,
-      hivesList: (state) => state.hives.hivesList
+      locationList: (state) => state.locations.locationList
+      // hivesList: (state) => state.hives.hivesList
     })
   },
   created() {
