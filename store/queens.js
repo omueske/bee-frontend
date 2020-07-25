@@ -32,7 +32,6 @@ export const actions = {
       .then((res) => {
         if (res.status === 200) {
           commit('ADD_QUEEN', res.data)
-          // commit('setHive', res.data)
         }
       })
   },

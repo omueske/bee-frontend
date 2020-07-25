@@ -2,7 +2,7 @@
   <b-row>
     <b-col>
       <b-button-group size="sm">
-        <ButtonMoveQueen />
+        <ButtonMoveQueen :queenid="queenid" />
         <ButtonModifyQueen :queenid="queenid" />
         <ButtonDeleteQueen :queenid="queenid" />
       </b-button-group>

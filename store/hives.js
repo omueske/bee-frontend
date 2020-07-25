@@ -3,10 +3,15 @@ import axios from 'axios'
 
 export const state = () => ({
   selectedHive: {},
-  hivesList: []
+  hivesList: [],
+  hivesQueens: []
 })
 
 export const mutations = {
+  LOAD_HIVE_QUEENS(state, hives) {
+    state.hivesQueens = hives
+  },
+
   set(state, hives) {
     state.hivesList = hives
   },
@@ -18,6 +23,17 @@ export const mutations = {
   },
   setHive(state, hive) {
     state.selectedHive = hive
+  },
+  ADD_QUEEN_TO_HIVE(state, payload) {
+    console.log(payload)
+    console.table(payload)
+    for (let i = 0; i < state.hivesList.length; i++) {
+      if (payload.hiveId === state.hivesList[i]._id) {
+        console.log('match ')
+
+        state.hivesList[i].queen.push(payload.queenId)
+      }
+    }
   },
   REMOVE_QUEEN_FROM_HIVE(state, { queenId }) {
     for (let i = 0; i < state.hivesList.length; i++) {
@@ -112,6 +128,7 @@ export const actions = {
         console.log(err)
       })
   },
+<<<<<<< HEAD
   agetQueenByQueenId: (state) => async (id) => {
     const hive = await state.hivesList.find((hive) => hive.queen._id === id)
     console.log('---> ' + hive)
@@ -132,6 +149,24 @@ export const actions = {
           console.log(res.data)
           commit('ADD_QUEEN', res.data)
         }
+=======
+
+  async moveQueenToHive({ commit }, payload) {
+    return await axios
+      .patch(
+        this.$axios.defaults.baseURL +
+          '/api/v1/hives/queen/' +
+          payload.queenId +
+          '/' +
+          payload.hiveId
+      )
+      .then((res) => {
+        commit('REMOVE_QUEEN_FROM_HIVE', res.data)
+        commit('ADD_QUEEN_TO_HIVE', payload)
+      })
+      .catch((err) => {
+        console.log(err)
+>>>>>>> fa4a88aac9e33e26bbefeb2fe908efa5e3c9778f
       })
   }
 }
@@ -151,5 +186,9 @@ export const getters = {
       return 'Kein Volk'
     }
     return erg.name
+  },
+  getIsQueenLinkedToHive: (state) => (id) => {
+    console.log('id' + id)
+    if (this.getHiveNameByQueenId(id)) return true
   }
 }

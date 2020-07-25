@@ -66,6 +66,7 @@ export default {
         hatchYear: '',
         race: '',
         pedigree: '',
+        race: '',
         comment: ''
       },
       hiveId: ''
@@ -98,6 +99,7 @@ export default {
         hatchYear: '',
         race: '',
         pedgree: '',
+        race: '',
         comment: ''
       }
 
