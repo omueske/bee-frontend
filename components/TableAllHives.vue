@@ -10,7 +10,6 @@
             <b-row
               v-for="queen in data.item.queen"
               :key="queen._id"
-              @click="klickMich()"
             >
               <b-col>
                 {{ queen.number }}
@@ -72,10 +71,5 @@ export default {
       hivesList: (state) => state.hives.hivesList
     })
   },
-  methods: {
-    klickMich() {
-      console.log('click')
-    }
-  }
 }
 </script>

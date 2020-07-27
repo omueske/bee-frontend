@@ -25,10 +25,6 @@
       <option v-for="hs in hiveStatuses" :key="hs" :value="hs">{{ hs }}</option>
     </b-form-select>
     <b-button @click="updateSelectedHive(lSelectedHive)">Click me</b-button>
-
-    {{ lSelectedHive.name }}<br /><br />
-    {{ selectedHive.name }}
-    {{ this.$refs }}
   </div>
 </template>
 
@@ -43,12 +39,6 @@ export default {
     }),
 
     lSelectedHive() {
-      // if (this.selectedHive) {
-      //   const x = JSON.parse(JSON.stringify(this.selectedHive))
-      //   return x
-      // } else {
-      //   return {}
-      // }
       return JSON.parse(JSON.stringify(this.selectedHive))
     }
   },
