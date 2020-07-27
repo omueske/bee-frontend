@@ -64,7 +64,6 @@ export default {
       queen: {
         number: '',
         hatchYear: '',
-        race: '',
         pedigree: '',
         race: '',
         comment: ''
@@ -97,7 +96,6 @@ export default {
       this.queen = {
         number: '',
         hatchYear: '',
-        race: '',
         pedgree: '',
         race: '',
         comment: ''

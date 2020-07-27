@@ -50,6 +50,7 @@ export const mutations = {
       }
     }
   },
+
   ADD_QUEEN(state, payload) {
     console.log('payload: ' + payload)
     console.log('hiveId: ' + payload.hive)
@@ -83,6 +84,19 @@ export const actions = {
         }
       })
   },
+
+  async updateSelectedHive({ commit }, hive) {
+    // console.table(hive)
+    await this.$axios
+      .put(this.$axios.defaults.baseURL + '/api/v1/hives/' + hive._id, hive)
+      .then((res) => {
+        if (res.status === 200) {
+          // console.table(res.data.data)
+          commit('setHive', hive)
+        }
+      })
+  },
+
   async get({ commit }) {
     await this.$axios
       .get(this.$axios.defaults.baseURL + '/api/v1/hives')
@@ -128,7 +142,6 @@ export const actions = {
         console.log(err)
       })
   },
-<<<<<<< HEAD
   agetQueenByQueenId: (state) => async (id) => {
     const hive = await state.hivesList.find((hive) => hive.queen._id === id)
     console.log('---> ' + hive)
@@ -149,8 +162,8 @@ export const actions = {
           console.log(res.data)
           commit('ADD_QUEEN', res.data)
         }
-=======
-
+      })
+  },
   async moveQueenToHive({ commit }, payload) {
     return await axios
       .patch(
@@ -166,7 +179,6 @@ export const actions = {
       })
       .catch((err) => {
         console.log(err)
->>>>>>> fa4a88aac9e33e26bbefeb2fe908efa5e3c9778f
       })
   }
 }

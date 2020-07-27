@@ -14,12 +14,7 @@
             {{ data.item.name }}
           </template>
           <template v-slot:cell(queenActions)="data">
-<<<<<<< HEAD
-            <ButtonGroupQueen :queenid="data.item.queen_id" />
-            <!-- {{ data.item.queen._id }} -->
-=======
             <ButtonGroupQueen :queenid="data.item._id" />
->>>>>>> fa4a88aac9e33e26bbefeb2fe908efa5e3c9778f
           </template>
         </b-table>
       </b-col>
