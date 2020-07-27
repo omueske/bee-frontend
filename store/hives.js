@@ -11,6 +11,14 @@ export const mutations = {
   LOAD_HIVE_QUEENS(state, hives) {
     state.hivesQueens = hives
   },
+  UPDATE_HIVESLIST(state, hive) {
+    for (let i = 0; i < state.hivesList.length; i++) {
+      console.log(state.hivesList[i]._id + ' <====> ' + hive._id)
+      if (state.hivesList[i]._id === hive._id) {
+        state.hivesList.splice(i, 1, hive)
+      }
+    }
+  },
 
   set(state, hives) {
     state.hivesList = hives
@@ -85,14 +93,15 @@ export const actions = {
       })
   },
 
-  async updateSelectedHive({ commit }, hive) {
+  updateSelectedHive({ commit }, hive) {
     // console.table(hive)
-    await this.$axios
+    this.$axios
       .put(this.$axios.defaults.baseURL + '/api/v1/hives/' + hive._id, hive)
       .then((res) => {
         if (res.status === 200) {
           // console.table(res.data.data)
           commit('setHive', hive)
+          commit('UPDATE_HIVESLIST', hive)
         }
       })
   },

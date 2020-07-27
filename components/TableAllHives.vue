@@ -5,7 +5,7 @@
     ></b-row>
     <b-row>
       <b-col>
-        <b-table hover :items="hivesList" :fields="fields">
+        <b-table hover :items="hivesList" :fields="fields" :ref="TABELLE">
           <template v-slot:cell(queen)="data">
             <b-row
               v-for="queen in data.item.queen"

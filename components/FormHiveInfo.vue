@@ -26,7 +26,9 @@
     </b-form-select>
     <b-button @click="updateSelectedHive(lSelectedHive)">Click me</b-button>
 
-    {{ lSelectedHive.name }}
+    {{ lSelectedHive.name }}<br /><br />
+    {{ selectedHive.name }}
+    {{ this.$refs }}
   </div>
 </template>
 
