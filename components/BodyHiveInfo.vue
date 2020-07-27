@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Übersicht {{ selectedHive.name }}</h1>
     <b-button @click="FormHiveInfoisVisible = !FormHiveInfoisVisible"
       >Formular ein/ausblenden</b-button
     >
+    <h1 v-if="FormHiveInfoisVisible">Übersicht {{ selectedHive.name }}</h1>
     <FormHiveInfo v-if="FormHiveInfoisVisible" />
   </div>
 </template>
