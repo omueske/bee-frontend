@@ -11,6 +11,7 @@ module.exports = {
     '@nuxtjs',
     'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
+    // eslint-disable-next-line
     'plugin:vue/recommented'
   ],
   plugins: [

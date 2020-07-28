@@ -5,12 +5,9 @@
     ></b-row>
     <b-row>
       <b-col>
-        <b-table hover :items="hivesList" :fields="fields" :ref="TABELLE">
+        <b-table hover :items="hivesList" :fields="fields">
           <template v-slot:cell(queen)="data">
-            <b-row
-              v-for="queen in data.item.queen"
-              :key="queen._id"
-            >
+            <b-row v-for="queen in data.item.queen" :key="queen._id">
               <b-col>
                 {{ queen.number }}
               </b-col>
@@ -70,6 +67,6 @@ export default {
     ...mapState({
       hivesList: (state) => state.hives.hivesList
     })
-  },
+  }
 }
 </script>

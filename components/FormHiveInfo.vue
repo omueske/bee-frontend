@@ -24,7 +24,8 @@
     <b-form-select id="hiveStatus" v-model="lSelectedHive.status">
       <option v-for="hs in hiveStatuses" :key="hs" :value="hs">{{ hs }}</option>
     </b-form-select>
-    <b-button @click="updateSelectedHive(lSelectedHive)">Click me</b-button>
+    <br /><br />
+    <b-button @click="updateSelectedHive(lSelectedHive)">Speichern</b-button>
   </div>
 </template>
 
