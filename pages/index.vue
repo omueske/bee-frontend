@@ -1,13 +1,18 @@
-<template
-  ><div>
+<template>
+  <div>
     <b-container>
-      <b-row
-        ><b-col><h1>Standorte</h1></b-col></b-row
-      ><b-row
-        ><b-col><ButtonAddLocation /></b-col>
+      <b-row>
+        <b-col>
+          <h1>Standorte</h1>
+        </b-col>
       </b-row>
-      <b-row v-for="loc in locationList" :key="loc._id" cols="1"
-        ><b-col>
+      <b-row>
+        <b-col>
+          <ButtonAddLocation />
+        </b-col>
+      </b-row>
+      <b-row v-for="loc in locationList" :key="loc._id" cols="1">
+        <b-col>
           <locationBox :locid="loc._id" />
         </b-col>
       </b-row>

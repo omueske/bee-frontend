@@ -3,27 +3,21 @@
     <b-row
       ><b-col><br /></b-col
     ></b-row>
-    {{ queensList }}
     <b-row>
       <b-col>
-        <b-table hover :items="hivesList" :fields="fields">
-          <template v-slot:cell(comment)="data">
-            {{ data.item.queen[0].comment }}
-          </template>
-          <template v-slot:cell(hive)="data">
-            {{ data.item.name }}
-          </template>
+        <b-table hover :items="queens" :fields="fields">
           <template v-slot:cell(queenActions)="data">
             <ButtonGroupQueen :queenid="data.item._id" />
           </template>
         </b-table>
+        {{ queens }}
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import ButtonGroupQueen from '@/components/ButtonGroupQueen'
 
 export default {
@@ -48,16 +42,16 @@ export default {
           sortable: false
         },
         {
-          key: 'queen.hatchYear',
+          key: 'hatchYear',
           label: 'Schlupfjahr',
           sortable: true
         },
         {
-          key: 'queen.comment',
+          key: 'comment',
           label: 'Kommentar',
           sortable: false
         },
-        { key: 'hive', label: 'Volk', sortable: true },
+        { key: 'hive.name', label: 'Volk', sortable: true },
         { key: 'queenActions', label: 'Aktionen', sortable: false }
       ]
     }
@@ -65,21 +59,9 @@ export default {
 
   computed: {
     ...mapState({
-      queenList: (state) => state.queens.queenList,
-      hivesList: (state) => state.hives.hivesList
-    }),
-    ...mapGetters('hives', ['getHiveNameByQueenId']),
-
-    queensList() {
-      const queensList = []
-      for (const hive in this.hivesList) {
-        for (const queen in hive.queen) {
-          queensList.push({ hiveName: hive._id, queen })
-        }
-      }
-      console.log(queensList)
-      return queensList
-    }
+      hivesList: (state) => state.hives.hivesList,
+      queens: (state) => state.hives.queens
+    })
   }
 }
 </script>

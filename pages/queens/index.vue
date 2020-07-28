@@ -32,7 +32,6 @@ export default {
   },
   created() {
     this.$store.dispatch('hives/get')
-    this.$store.dispatch('queens/loadQueens')
     this.$store.dispatch('locations/getLocationsHives')
   }
 }

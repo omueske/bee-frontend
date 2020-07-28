@@ -4,7 +4,7 @@ import axios from 'axios'
 export const state = () => ({
   selectedHive: {},
   hivesList: [],
-  hivesQueens: []
+  queens: []
 })
 
 export const mutations = {
@@ -22,6 +22,22 @@ export const mutations = {
 
   set(state, hives) {
     state.hivesList = hives
+
+    const queens = []
+    for (const hive of hives) {
+      // console.log('Hive' + hive)
+      if (hive.queen.length > 0) {
+        // queen.hive = {}
+        for (const queen of hive.queen) {
+          queen.hive = {}
+          queen.hive._id = hive._id
+          queen.hive.name = hive.name
+          state.queens.push(queen)
+        }
+      }
+    }
+    console.table(queens)
+    // state.queens = queens
   },
   add(state, value) {
     state.hivesList.push(value)
@@ -63,11 +79,16 @@ export const mutations = {
     console.log('payload: ' + payload)
     console.log('hiveId: ' + payload.hive)
     console.log('queen: ' + payload.queen)
+    // TODO: HIVE-Object must be added for Hive-Array and whats about _id?
+    state.queens.push(payload.queen)
     for (let i = 0; i < state.hivesList.length; i++) {
       if (state.hivesList[i] === payload.hive) {
         state.hivesList[i].queen.push(payload.queen)
       }
     }
+  },
+  LOAD_QUEENS(state, queens) {
+    state.queens = queens
   }
 }
 
@@ -190,6 +211,20 @@ export const actions = {
         console.log(err)
       })
   }
+
+  // loadQueens({ commit, state }) {
+  //   const queensList = []
+  //   for (const hive of state.hivesList) {
+  //     // console.log(state.hivesList)
+  //     console.log('Hive' + hive)
+  //     for (const queen of hive.queen) {
+  //       console.log('Queen' + queen)
+  //       queensList.push({ hiveName: hive.name, queen })
+  //     }
+  //   }
+  //   console.log(queensList)
+  //   commit('LOAD_QUEENS')
+  // }
 }
 
 export const getters = {
