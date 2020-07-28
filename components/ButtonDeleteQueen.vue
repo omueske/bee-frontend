@@ -45,7 +45,7 @@ export default {
 
   methods: {
     ...mapActions('hives', ['unLinkQueenFromHive']),
-    ...mapActions('queens', ['deleteQueen']),
+    // ...mapActions('queens', ['deleteQueen']),
     ...mapGetters('hives', ['getHiveByQueenId']),
 
     resetModal() {
@@ -56,12 +56,12 @@ export default {
       event.preventDefault()
 
       // console.log(this.queenid)
-      // this.unLinkQueenFromHive(this.queenid)
-      this.deleteQueen(this.queenid)
-        .then(() => this.unLinkQueenFromHive(this.queenid))
-        .catch((err) => {
-          console.log('API-ERROR:' + err)
-        })
+      this.unLinkQueenFromHive(this.queenid)
+      // this.deleteQueen(this.queenid)
+      //   .then(() => this.unLinkQueenFromHive(this.queenid))
+      //   .catch((err) => {
+      //     console.log('API-ERROR:' + err)
+      //   })
 
       // Hide the modal manually
       this.$nextTick(() => {

@@ -68,10 +68,20 @@ export const mutations = {
       // Das löschen nur ausführen wenn mehr als 0 Elemente gefunden werden
       // Ansonsten wird in jeder Location ein Element aus dem Store gelöscht
       if (delQueen > 0) {
-        console.log('Deleting in Hive: ' + state.hiveList[i]._id)
         state.hivesList[i].queen.splice(delQueen, 1)
         delQueen = 0
       }
+    }
+  },
+  REMOVE_QUEEN_FROM_QUEENS(state, queenId) {
+    console.log('QID: ' + queenId)
+    let delQueen = state.queens.findIndex((x) => x._id === queenId)
+
+    // Das löschen nur ausführen wenn mehr als 0 Elemente gefunden werden
+    // Ansonsten wird in jeder Location ein Element aus dem Store gelöscht
+    if (delQueen > 0) {
+      state.queens.splice(delQueen, 1)
+      delQueen = 0
     }
   },
 
@@ -166,7 +176,9 @@ export const actions = {
     return await axios
       .delete(this.$axios.defaults.baseURL + '/api/v1/hives/queen/' + queenId)
       .then((res) => {
-        commit('REMOVE_QUEEN_FROM_HIVE', res.data)
+        commit('REMOVE_QUEEN_FROM_HIVE', queenId)
+        console.table(res.data)
+        commit('REMOVE_QUEEN_FROM_QUEENS', queenId)
       })
       .catch((err) => {
         console.log(err)

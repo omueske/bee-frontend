@@ -10,7 +10,6 @@
             <ButtonGroupQueen :queenid="data.item._id" />
           </template>
         </b-table>
-        {{ queens }}
       </b-col>
     </b-row>
   </b-container>
