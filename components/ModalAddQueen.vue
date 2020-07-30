@@ -6,7 +6,6 @@
     @hidden="resetModal"
     @ok="handleOk"
   >
-    {{ stateQueen._id }}
     <form ref="createQueenForm">
       <b-form-group id="number" label="Nummer der Königin" label-for="number">
         <b-form-input
@@ -28,6 +27,18 @@
           :value="queen.pedigree"
           @input="updateField('pedigree', $event)"
       /></b-form-group>
+      <!-- <b-form-group id="race" label="Rasse" label-for="race">
+        <b-form-select id="race" @change="updateField('race', $event)">
+          <option
+            v-for="race in beeRaces"
+            :key="race._id"
+            :value="race._id"
+          >
+            {{ hive.name }}
+          </option>
+          ></b-form-select
+        >
+      </b-form-group> -->
       <b-form-group id="comment" label="Kommentar:" label-for="comment">
         <b-form-input
           id="comment"
@@ -73,8 +84,8 @@ export default {
   },
   computed: {
     ...mapState({
-      stateQueen: (state) => state.queens.selectedQueen,
-      stateHivesList: (state) => state.hives.hivesList
+      stateHivesList: (state) => state.hives.hivesList,
+      beeRaces: (state) => state.bmConfig.beeRaces
     })
   },
 
